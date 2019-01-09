@@ -8,10 +8,19 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.reinaldo.recicleview.R;
+import com.example.reinaldo.recicleview.activity.model.Filme;
+
+import java.util.List;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
 
+    private List<Filme> listaFilme;
 
+    //Enviado para o mainActivity
+    public Adapter(List<Filme> lista) {
+
+        this.listaFilme = lista;
+    }
 
     @Override //cria a tela ou seja ele infla o meu xml
     public MyViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
@@ -29,15 +38,17 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
     @Override
     public void onBindViewHolder(MyViewHolder holder, int i) {
 
-        holder.genero.setText("Comédia");
-        holder.ano.setText("2018");
-        holder.titulo.setText("Titulo de Teste");
+        Filme filme = listaFilme.get(i);
+
+        holder.genero.setText(filme.getGenero());
+        holder.ano.setText(filme.getAno());
+        holder.titulo.setText(filme.getTituloFilme());
     }
 
     //Ele me da quantos views será visualizado
     @Override
     public int getItemCount() {
-        return 5;
+        return listaFilme.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
